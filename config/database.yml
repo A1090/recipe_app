@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  port: <%= ENV.fetch('POSTGRESQL_PORT') { 5432 } %>
+
+development: &development
+  <<: *default
+  database: <%= ENV.fetch("POSTGRESQL_DATABASE") { 'recipe-app-development' } %>
+  host: <%= ENV.fetch("POSTGRESQL_HOST") { "localhost" } %>
+  username: <%= ENV['POSTGRESQL_USERNAME'] %>
+  password: <%= ENV['POSTGRESQL_PASSWORD'] %>
+
+test:
+  <<: *default
+  database: recipe-app-test
+  host: localhost
+
+production:
+  <<: *default
+  database: <%= ENV.fetch("POSTGRESQL_DATABASE") { "recipe-app-production" } %>
+  host: <%= ENV.fetch("POSTGRESQL_HOST") { "localhost" } %>
+  username: <%= ENV.fetch("POSTGRESQL_USERNAME") { "ikigai" } %>
+  password: <%= ENV['POSTGRESQL_PASSWORD'] %>

@@ -1,0 +1,45 @@
+<div class="align-items-center d-flex photo-overlay py-5 cover" style="background-image: url(&quot;../images/cover_dark.jpg&quot;);">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="mb-5 lead">Here are the results of your search. Enjoy cooking!</p>
+      </div>
+    </div>
+
+    <div class="row" style="overflow:scroll; height:400px;">
+      <div class="col-md-12">
+        <ul class="list-group">
+        <% @recipes.each do |recipe| %>
+          <div class="list-group-item d-flex justify-content-between align-items-center">
+            <img class="img-fluid d-block mx-auto rounded-circle" src="<%=recipe.image_link%>" width="100" alt="Card image cap" >
+            <div class="col-md-5 lead" style="font-size=0.8rem;"><strong><%= link_to recipe.title, {action: :show, id: recipe.id}%></strong></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+              <div class="row">Prep time: <%=recipe.preptime%> mins</div>
+              <div class="row">Cook time: <%=recipe.cooktime%> mins</div>
+            </div>
+            <div class="col-md-2">
+              <div class="row">Category: <%=recipe.category ? recipe.category.title : "none"%></div>
+              <div class="row">Rating: <%=recipe.rating%></div>
+            </div>
+          </div>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4 text-center" >
+            <ul class="pagination pagination-lg">
+              <li class="page-item"> <%= will_paginate(@recipes,:previous_label => "Prev", :next_label => "Next",:class=>"page-item",:outer_window => 1,:inner_window => 0) %></li>
+            </ul>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

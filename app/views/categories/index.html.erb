@@ -1,0 +1,40 @@
+<div class="align-items-center d-flex photo-overlay py-5 cover" style="background-image: url(&quot;images/cover_dark.jpg&quot;);">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <%= form_with url: "/recipes/search", method: :get, id: "search_form" do |form| %>
+            <div class="row">
+            <%= form.label :query, "Add your ingredients space or comma separated"%>
+            </div>
+            <div class="row">
+            <%= form.search_field(:query, class: "form-control", placeholder: "eg. milk eggs, chicken", id: "search_field") %>
+            </div>
+            <br>
+            <div class="row">
+            <%= form.label :category_id, "Filter by a category if you'd like"%>
+            </div>
+            <div class="row">
+              <div class="btn-group">
+              <%= form.collection_select(:category_id, @categories, :id, :title, {prompt: true}, {class: 'btn btn-primary dropdown-toggle w-100', onchange: 'addCategoriesToList()'}) %>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+            <%= form.submit "Search", class: "btn btn-primary btn-lg w-25", id: "submit_btn"%>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      <br><br>
+      <div class="row">
+        <div class="col-md-6" style="overflow:scroll; height:200px;">
+          <ul title='Selected Categories' id="ingredientList" class="list-group mx-5 my-2" ></ul>
+        </div>
+        <div class="col-md-6" style="overflow:scroll; height:200px;">
+          <ul id="categoryList" class="list-group mx-5 my-2" ></ul>
+        </div>
+      </div>
+    </div>
+  </div>

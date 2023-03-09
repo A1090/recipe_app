@@ -1,0 +1,43 @@
+<div class="py-5">
+  <div class="container">
+    <br><br><br><br>
+    <div class="row">
+      <div class="col-md-6 order-2 order-lg-1 p-0"> 
+        <img class="img-fluid d-block rounded-circle" src="<%=@recipe.image_link%>"> 
+      </div>
+      <div class="px-5 col-lg-6 d-flex flex-column align-items-start justify-content-center order-1 order-lg-2" >
+          <div class="blockquote">
+            <p class="mb-0 lead"><%= @recipe.title %> - <%= @recipe.rating %> &#11088</p>
+            <div class="blockquote-footer">Author: <cite title="Source Title"><%= @recipe.author %></cite></div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-12">
+                  <ul class="list-inline">
+                    <li class="list-inline-item">Category: <%= @recipe.category ? @recipe.category.title : "none" %></li>
+                    <li class="list-inline-item">Prep time: <%= @recipe.preptime %> mins</li>
+                    <li class="list-inline-item">Cook time: <%= @recipe.cooktime %> mins</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 align-items-start">
+              <div class="row">
+                <div class="col-md-12 align-items-start">
+                  <ul class="">
+                    <% JSON.parse(@recipe.ingredients).each do |ingredient| %>
+                    <li><%=ingredient%></li>
+                    <%end%>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
