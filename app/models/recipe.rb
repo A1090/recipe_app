@@ -35,4 +35,11 @@ class Recipe < ApplicationRecord
   pg_search_scope :search_ingredients, against: :ingredients, 
                                        using: { tsearch: { dictionary: 'english', any_word: true, tsvector_column: 'searchable_ingredients'} },
                                        :order_within_rank => 'recipes.rating DESC, recipes.cooktime ASC'
+  
+  def self.search(category, query)
+    recipes = Recipe.includes(:category).filter_by_category(category)
+    recipes = recipes.search_ingredients(query) unless query.empty?
+
+    recipes
+  end
 end
